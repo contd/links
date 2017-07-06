@@ -1,0 +1,6 @@
+*.tmp
+*.swp
+*.so
+.directory
+.DS_Store
+
