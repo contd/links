@@ -8,14 +8,15 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
-	"github.com/contd/links"
+
+  "github.com/contd/links"
 )
 
 var a main.App
 
 func TestMain(m *testing.M) {
 	a = main.App{}
-	a.Initialize("saved_test.sqlite")
+	a.Initialize("apiuser", "wj5np47dn", "links_test")
 	ensureTableExists()
 	code := m.Run()
 	clearTable()
@@ -169,9 +170,10 @@ func addLink() {
 
 const tableCreationQuery = `CREATE TABLE IF NOT EXISTS links
 (
-	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-	url VARCHAR NOT NULL,
-	category VARCHAR NOT NULL,
-	created_on VARCHAR NOT NULL,
-	done INTEGER
+	id INT NOT NULL AUTO_INCREMENT,
+	url VARCHAR(255) NOT NULL,
+	category VARCHAR(50) NOT NULL,
+	created_on CHAR(25) NOT NULL,
+	done INT,
+	PRIMARY KEY (id)
 )`

@@ -1,6 +1,8 @@
 package main
 
-import "github.com/jmoiron/sqlx"
+import (
+	"database/sql"
+)
 
 type link struct {
 	ID       int    `json:"id"`
@@ -10,25 +12,25 @@ type link struct {
 	Done     int    `json:"done"`
 }
 
-func (l *link) getLink(db *sqlx.DB) error {
+func (l *link) getLink(db *sql.DB) error {
 	return db.QueryRow(
 		"SELECT id, url, category, created_on, done FROM links WHERE id=?",
 		l.ID).Scan(&l.ID, &l.Url, &l.Category, &l.Created, &l.Done)
 }
 
-func (l *link) updateLink(db *sqlx.DB) error {
+func (l *link) updateLink(db *sql.DB) error {
 	_, err := db.Exec(
 		"UPDATE links SET url=?, category=?, created_on=?, done=? WHERE id=?",
 		l.Url, l.Category, l.Created, l.Done, l.ID)
 	return err
 }
 
-func (l *link) deleteLink(db *sqlx.DB) error {
+func (l *link) deleteLink(db *sql.DB) error {
 	_, err := db.Exec("DELETE FROM links WHERE id=?", l.ID)
 	return err
 }
 
-func (l *link) createLink(db *sqlx.DB) error {
+func (l *link) createLink(db *sql.DB) error {
 	_, err := db.Exec(
 		"INSERT INTO links(url, category, created_on, done) VALUES(?, ?, ?, ?)",
 		l.Url, l.Category, l.Created, l.Done)
@@ -38,7 +40,7 @@ func (l *link) createLink(db *sqlx.DB) error {
 	return nil
 }
 
-func getLinks(db *sqlx.DB) ([]link, error) {
+func getLinks(db *sql.DB) ([]link, error) {
 	rows, err := db.Query("SELECT id, url, category, created_on, done FROM links")
 	if err != nil {
 		return nil, err

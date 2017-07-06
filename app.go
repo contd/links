@@ -8,19 +8,19 @@ import (
 	"net/http"
 	"strconv"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
-	"github.com/jmoiron/sqlx"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 type App struct {
 	Router *mux.Router
-	DB     *sqlx.DB
+	DB     *sql.DB
 }
 
-func (a *App) Initialize(dbname string) {
+func (a *App) Initialize(user, password, dbname string) {
 	var err error
-	a.DB, err = sqlx.Connect("sqlite3", dbname)
+	connStr := fmt.Sprintf("%s:%s@tcp(:3306)/%s", user, password, dbname)
+	a.DB, err = sql.Open("mysql", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
