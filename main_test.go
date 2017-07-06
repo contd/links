@@ -8,15 +8,13 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
-
-  "github.com/contd/links"
 )
 
 var a main.App
 
 func TestMain(m *testing.M) {
 	a = main.App{}
-	a.Initialize("apiuser", "wj5np47dn", "links_test")
+	a.Initialize("apiuser", "apipass", "links_test")
 	ensureTableExists()
 	code := m.Run()
 	clearTable()
