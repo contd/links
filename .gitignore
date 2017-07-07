@@ -3,4 +3,5 @@
 *.so
 .directory
 .DS_Store
+saved_test.sqlite
 
