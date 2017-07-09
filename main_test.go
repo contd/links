@@ -3,6 +3,7 @@ package main_test
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/contd/links"
 	"log"
 	"net/http"
 	"net/http/httptest"
