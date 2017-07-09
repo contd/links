@@ -74,6 +74,16 @@ func TestCreateLink(t *testing.T) {
 	}
 }
 
+func TestGetLinks(t *testing.T) {
+	clearTable()
+	addLink()
+
+	req, _ := http.NewRequest("GET", "/links", nil)
+	response := executeRequest(req)
+
+	checkResponseCode(t, http.StatusOK, response.Code)
+}
+
 func TestGetLink(t *testing.T) {
 	clearTable()
 	addLink()

@@ -1,13 +1,16 @@
 package main
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+	"time"
+)
 
 type link struct {
-	ID       int    `json:"id"`
-	Url      string `json:"url"`
-	Category string `json:"category"`
-	Created  string `json:"created_on"`
-	Done     int    `json:"done"`
+	ID       int       `json:"id"`
+	Url      string    `json:"url"`
+	Category string    `json:"category"`
+	Created  time.Time `json:"created_on"`
+	Done     int       `json:"done"`
 }
 
 func (l *link) getLink(db *sqlx.DB) error {
