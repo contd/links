@@ -11,5 +11,4 @@ FROM alpine
 VOLUME /data
 WORKDIR /app
 COPY --from=build-env /src/goapp /app/
-COPY --from=build-env /src/saved.sqlite /data/
 ENTRYPOINT ./goapp
