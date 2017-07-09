@@ -18,8 +18,8 @@ func (l *link) getLink(db *sqlx.DB) error {
 
 func (l *link) updateLink(db *sqlx.DB) error {
 	_, err := db.Exec(
-		"UPDATE links SET url=?, category=?, created_on=?, done=? WHERE id=?",
-		l.Url, l.Category, l.Created, l.Done, l.ID)
+		"UPDATE links SET url=?, category=?, done=? WHERE id=?",
+		l.Url, l.Category, l.Done, l.ID)
 	return err
 }
 
@@ -30,8 +30,8 @@ func (l *link) deleteLink(db *sqlx.DB) error {
 
 func (l *link) createLink(db *sqlx.DB) error {
 	_, err := db.Exec(
-		"INSERT INTO links(url, category, created_on, done) VALUES(?, ?, ?, ?)",
-		l.Url, l.Category, l.Created, l.Done)
+		"INSERT INTO links(url, category, done) VALUES(?, ?, ?)",
+		l.Url, l.Category, l.Done)
 	if err != nil {
 		return err
 	}

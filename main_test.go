@@ -3,12 +3,12 @@ package main_test
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/contd/links"
 	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
-	"github.com/contd/links"
 )
 
 var a main.App
@@ -52,7 +52,7 @@ func TestGetNonExistentLink(t *testing.T) {
 func TestCreateLink(t *testing.T) {
 	clearTable()
 
-	payload := []byte(`{"url":"new url","category":"general","created_on":"2017-02-02T12:00:00TZ","done":0}`)
+	payload := []byte(`{"url":"new url","category":"general","done":0}`)
 
 	req, _ := http.NewRequest("POST", "/link", bytes.NewBuffer(payload))
 	response := executeRequest(req)
@@ -71,10 +71,6 @@ func TestCreateLink(t *testing.T) {
 
 	if m["category"] != "general" {
 		t.Errorf("Expected link category to be 'general'. Got '%v'", m["category"])
-	}
-
-	if m["created_on"] != "2017-02-02T12:00:00TZ" {
-		t.Errorf("Expected link created_on to be '2017-02-02T12:00:00TZ'. Got '%v'", m["created_on"])
 	}
 }
 
@@ -172,6 +168,6 @@ const tableCreationQuery = `CREATE TABLE IF NOT EXISTS links
 	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	url VARCHAR NOT NULL,
 	category VARCHAR NOT NULL,
-	created_on VARCHAR NOT NULL,
+	created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
 	done INTEGER
 )`
