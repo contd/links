@@ -2,6 +2,25 @@
 
 This is a rest api service for managing saved links for personal use and to replace the storage currently used by the front end web app.
 
+## Development
+
+Besure to add to and run tests for development.  This will create a test database `saved_test.sqlite` if one does not exist.  The file is not deleted after tests run so if changes are made to an existing table's structure, the database file should be removed before running the tests.
+
+Once the tests all pass you can build your own docker image with the included docker file like so:
+
+```shell
+docker build -t contd/links .
+```
+If you use `go install` the binary will expect the saved.sqlite file to be in the same directory.  You can override this by passing an environment variable like so:
+
+```shell
+SQLITE_PATH=/some/other/path/saved.sqlite links
+```
+
+This assumes your `PATH` includes `$GOPATH/bin` and you must include the file name of the sqlite database file you want to use.  The tables are not created by the application and it expects them to be there so you can use the one created from running the tests and just rename it.
+
+## Docker
+
 To run this in docker and persist the sqlite database, use the following once you've created an image from the `Dockerfile`:
 
 ```shell
