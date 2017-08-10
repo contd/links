@@ -31,14 +31,20 @@ func (l *link) deleteLink(db *sqlx.DB) error {
 	return err
 }
 
-func (l *link) createLink(db *sqlx.DB) error {
-	_, err := db.Exec(
-		"INSERT INTO links(url, category, done) VALUES(?, ?, ?)",
-		l.Url, l.Category, l.Done)
+func (l *link) createLink(db *sqlx.DB) (int64, error) {
+	res, err := db.Exec(
+		"INSERT INTO links(url, category, created_on, done) VALUES(?, ?, ?, ?)",
+		l.Url, l.Category, l.Created, l.Done)
 	if err != nil {
-		return err
+		return -1, err
+	} else {
+		id, err := res.LastInsertId()
+		if err != nil {
+			return -1, err
+		} else {
+			return id, nil
+		}
 	}
-	return nil
 }
 
 func getLinks(db *sqlx.DB) ([]link, error) {

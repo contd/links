@@ -79,7 +79,8 @@ func (a *App) createLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer r.Body.Close()
-	if err := l.createLink(a.DB); err != nil {
+	_, err := l.createLink(a.DB)
+	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
