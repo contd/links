@@ -3,11 +3,11 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
@@ -29,8 +29,9 @@ func (a *App) Initialize(dbname string) {
 }
 
 func (a *App) Run(addr string) {
-	fmt.Println("Running on http://localhost:5555/")
-	log.Fatal(http.ListenAndServe(":5555", a.Router))
+	log.Println("Running on http://localhost:5555/")
+	corsObj := handlers.AllowedOrigins([]string{"*"})
+	log.Fatal(http.ListenAndServe(":5555", handlers.CORS(corsObj)(a.Router)))
 }
 
 func (a *App) initializeRoutes() {

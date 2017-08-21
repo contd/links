@@ -48,7 +48,7 @@ This assumes your `PATH` includes `$GOPATH/bin` and you must include the file na
 To run this in docker and persist the sqlite database, use the following once you've created an image from the `Dockerfile`:
 
 ```bash
-docker run --name golinks -d -p 5555:5555 -v $GOPATH/src/githib.com/contd/links:/data contd/links
+docker run --name golinks -d -p 5555:5555 -v $GOPATH/src/github.com/contd/links:/data contd/links
 ```
 
 Then use the `docker-links.service` file to make the service autostart on boot:
@@ -58,4 +58,3 @@ sudo cp $GOPATH/src/github.com/contd/links/docker-links.service /etc/systemd/sys
 sudo systemctl enable docker-links.service
 sudo systemctl start docker-links.service
 ```
-
