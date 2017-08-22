@@ -1,43 +1,28 @@
 [{
-  "url": "https://www.awsadvent.com/2016/12/06/just-add-code-fun-with-terraform-modules-and-aws/",
-  "created_on": "2017-06-11T00:36:13.696Z",
-  "category": "tutorial",
-  "done": false
-}, {
   "url": "https://labs.kollegorna.se/blog/2017/06/service-worker-gotchas/",
   "created_on": "2017-06-26T20:59:05.563Z",
   "category": "javascript",
   "done": false
 }, {
-  "url": "https://github.com/tockins/realize",
-  "created_on": "2017-06-26T21:07:51.453Z",
-  "category": "github",
-  "done": false
-}, {
   "url": "https://dev.to/klnusbaum/why-im-so-frustrated-withgo",
   "created_on": "2017-06-26T21:17:44.305Z",
   "category": "coding",
-  "done": false
-}, {
-  "url": "https://github.com/ecrmnn/collect.js",
-  "created_on": "2017-06-26T21:23:55.573Z",
-  "category": "javascript",
-  "done": false
+  "done": true
 }, {
   "url": "http://www.react-flight.io/",
   "created_on": "2017-06-26T21:25:31.407Z",
   "category": "javascript",
-  "done": false
+  "done": true
 }, {
   "url": "https://github.com/transceptor-technology/siridb-server",
   "created_on": "2017-06-26T21:27:14.306Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "http://www.thegeekstuff.com/2017/06/git-branch/",
   "created_on": "2017-06-26T21:39:58.684Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://www.sitepoint.com/web-animation-tutorial-part-1/",
   "created_on": "2017-06-29T06:26:21.304Z",
@@ -52,27 +37,17 @@
   "url": "https://medium.com/@Zadvorsky/into-vertex-shaders-594e6d8cd804",
   "created_on": "2017-06-29T21:11:27.396Z",
   "category": "javascript",
-  "done": false
-}, {
-  "url": "https://www.codementor.io/radubrehar/thinking-in-react-8duata34n",
-  "created_on": "2017-06-29T21:11:43.745Z",
-  "category": "javascript",
   "done": true
-}, {
-  "url": "https://hackernoon.com/machine-learning-with-javascript-part-1-9b97f3ed4fe5",
-  "created_on": "2017-06-29T21:11:50.039Z",
-  "category": "javascript",
-  "done": false
 }, {
   "url": "https://gokit.io/examples/stringsvc.html",
   "created_on": "2017-06-29T21:12:36.781Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://www.codementor.io/vijayst/using-firebase-with-redux-for-building-a-react-app-du1086puw",
   "created_on": "2017-06-29T21:13:37.852Z",
   "category": "javascript",
-  "done": false
+  "done": true
 }, {
   "url": "https://medium.freecodecamp.org/node-js-streams-everything-you-need-to-know-c9141306be93",
   "created_on": "2017-06-29T21:14:45.688Z",
@@ -82,12 +57,7 @@
   "url": "https://hacks.mozilla.org/2017/06/introducing-filterbubbler-a-webextension-built-using-reactredux/",
   "created_on": "2017-06-29T21:15:04.004Z",
   "category": "javascript",
-  "done": false
-}, {
-  "url": "https://hackernoon.com/build-a-serverless-twilio-sms-call-forwarding-bot-in-7-minutes-using-node-js-stdlib-411697c3cc1b",
-  "created_on": "2017-06-29T21:15:25.363Z",
-  "category": "javascript",
-  "done": false
+  "done": true
 }, {
   "url": "https://www.sitepoint.com/redux-vs-mobx-which-is-best/",
   "created_on": "2017-06-29T21:15:34.824Z",
@@ -102,72 +72,32 @@
   "url": "https://medium.freecodecamp.org/a-gentle-introduction-to-data-structures-how-graphs-work-a223d9ef8837",
   "created_on": "2017-06-29T21:16:37.470Z",
   "category": "javascript",
-  "done": false
+  "done": true
 }, {
   "url": "https://www.opsdash.com/blog/golang-app-monitoring-statsd-expvar-prometheus.html",
   "created_on": "2017-06-30T14:22:08.632Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "http://idiomaticgo.com/post/best-practice/accept-interfaces-return-structs/",
   "created_on": "2017-06-30T14:22:52.379Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://arschles.svbtle.com/why-tech-startups-should-look-at-go-ii",
   "created_on": "2017-06-30T14:30:51.827Z",
   "category": "coding",
-  "done": false
-}, {
-  "url": "https://github.com/anywhichway/blockstore",
-  "created_on": "2017-06-30T14:55:35.453Z",
-  "category": "github",
-  "done": false
+  "done": true
 }, {
   "url": "https://medium.com/slack-developer-blog/building-a-sentiment-analysis-bot-with-ibm-watson-and-raspberry-pi-eeb399bb8803",
   "created_on": "2017-06-30T16:48:04.648Z",
   "category": "coding",
-  "done": false
-}, {
-  "url": "https://auth0.com/blog/build-a-chat-app-with-react/",
-  "created_on": "2017-06-30T23:26:27.578Z",
-  "category": "javascript",
   "done": true
-}, {
-  "url": "https://redom.js.org/documentation/",
-  "created_on": "2017-06-30T23:38:18.812Z",
-  "category": "javascript",
-  "done": false
-}, {
-  "url": "https://github.com/lukeed/taskr",
-  "created_on": "2017-06-30T23:42:07.183Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/volatiletech/abcweb",
-  "created_on": "2017-07-01T01:19:19.556Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/chewxy/gorgonia",
-  "created_on": "2017-07-01T17:31:42.320Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/karan/vocabulary",
-  "created_on": "2017-07-01T17:31:48.842Z",
-  "category": "github",
-  "done": false
 }, {
   "url": "https://golangbot.com/interfaces-part-2/",
   "created_on": "2017-07-01T17:32:27.983Z",
   "category": "coding",
-  "done": false
-}, {
-  "url": "https://github.com/json-iterator/go",
-  "created_on": "2017-07-01T17:33:21.781Z",
-  "category": "github",
-  "done": false
+  "done": true
 }, {
   "url": "https://www.zupzup.org/static-blog-generator-go/index.html",
   "created_on": "2017-07-01T17:33:44.781Z",
@@ -177,27 +107,17 @@
   "url": "https://dave.cheney.net/2017/06/11/go-without-package-scoped-variables",
   "created_on": "2017-07-01T17:34:11.300Z",
   "category": "coding",
-  "done": false
-}, {
-  "url": "https://github.com/octohedron/gauth",
-  "created_on": "2017-07-01T17:37:17.528Z",
-  "category": "github",
-  "done": false
+  "done": true
 }, {
   "url": "https://semaphoreci.com/community/tutorials/building-and-testing-a-rest-api-in-go-with-gorilla-mux-and-postgresql",
   "created_on": "2017-07-02T00:26:34.107Z",
   "category": "coding",
-  "done": false
-}, {
-  "url": "https://github.com/nytimes/gizmo",
-  "created_on": "2017-07-02T01:02:54.531Z",
-  "category": "github",
-  "done": false
+  "done": true
 }, {
   "url": "https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/07.2.html",
   "created_on": "2017-07-02T01:15:34.950Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://www.robinwieruch.de/redux-mobx-confusion/",
   "created_on": "2017-07-02T01:16:18.531Z",
@@ -207,90 +127,115 @@
   "url": "https://medium.com/@PurdonKyle/building-a-unit-testable-api-in-golang-b42ff1fcbae7",
   "created_on": "2017-07-02T01:24:01.563Z",
   "category": "coding",
-  "done": false
-}, {
-  "url": "https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices",
-  "created_on": "2017-07-02T01:40:28.552Z",
-  "category": "tutorial",
-  "done": false
-}, {
-  "url": "https://medium.com/@jmarhee/building-an-object-storage-service-ecd771d91483",
-  "created_on": "2017-07-02T01:57:22.441Z",
-  "category": "tutorial",
-  "done": false
-}, {
-  "url": "https://github.com/ryanbressler/CloudForest",
-  "created_on": "2017-07-02T02:28:47.858Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/gdm85/grpc-go-multiplex",
-  "created_on": "2017-07-02T03:29:15.349Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "http://www.grpc.io/docs/quickstart/go.html",
-  "created_on": "2017-07-02T03:38:01.420Z",
-  "category": "tutorial",
-  "done": false
-}, {
-  "url": "https://github.com/azu/immutable-array-prototype",
-  "created_on": "2017-07-02T18:21:47.662Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/jaredpalmer/formik",
-  "created_on": "2017-07-03T03:14:09.951Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/zero-plus-x/neoform",
-  "created_on": "2017-07-03T15:04:18.751Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/VividCortex/pm",
-  "created_on": "2017-07-04T10:49:00.727Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/Jimmy02020/aleppo",
-  "created_on": "2017-07-04T11:00:45.586Z",
-  "category": "github",
-  "done": false
-}, {
-  "url": "https://github.com/yhat/scrape",
-  "created_on": "2017-07-04T18:12:43.710Z",
-  "category": "github",
-  "done": false
+  "done": true
 }, {
   "url": "https://blog.gopheracademy.com/advent-2016/http-client/",
   "created_on": "2017-07-05T16:08:14.247Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://blog.gopheracademy.com/advent-2015/vendor-folder/",
   "created_on": "2017-07-05T16:09:14.738Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://blog.gopheracademy.com/advent-2016/some-tools-for-go-that-you-might-not-know-yet/",
   "created_on": "2017-07-05T16:09:31.244Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://blog.gopheracademy.com/advent-2015/glow-map-reduce-for-golang/",
   "created_on": "2017-07-05T16:09:38.186Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://blog.gopheracademy.com/advent-2016/advanced-encoding-decoding/",
   "created_on": "2017-07-05T16:09:43.801Z",
   "category": "coding",
-  "done": false
+  "done": true
 }, {
   "url": "https://blog.gopheracademy.com/advent-2016/machine-learning-google-prediction-api/",
   "created_on": "2017-07-05T16:09:48.566Z",
   "category": "coding",
+  "done": true
+}, {
+  "url": "https://blog.risingstack.com/mastering-async-await-in-nodejs/",
+  "created_on": "2017-07-05T19:56:01.385Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://medium.com/@SylvainPV/type-safety-in-javascript-using-es6-proxies-eee8fbbbd600",
+  "created_on": "2017-07-05T20:06:43.016Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://reactrocket.com/post/react-redux-optimization/",
+  "created_on": "2017-07-06T01:27:46.339Z",
+  "category": "javascript",
+  "done": true
+}, {
+  "url": "https://www.jstwister.com/post/unit-testing-beginners-guide-mock-http-and-files/",
+  "created_on": "2017-07-06T15:14:36.558Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://medium.com/agrea-technogies/mocking-dependencies-in-go-bb9739fef008",
+  "created_on": "2017-07-06T22:22:08.470Z",
+  "category": "coding",
+  "done": true
+}, {
+  "url": "https://blog.minio.io/golang-internals-part-2-nice-benefits-of-named-return-values-1e95305c8687",
+  "created_on": "2017-07-06T22:22:14.123Z",
+  "category": "coding",
+  "done": true
+}, {
+  "url": "https://blog.clubhouse.io/going-mobile-with-react-native-891e1a602465",
+  "created_on": "2017-07-08T01:15:00.154Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://medium.com/code-divoire/going-mobile-wrapping-an-existing-web-application-in-cordova-phonegap-106d8b60bb9a",
+  "created_on": "2017-08-01T01:10:06.565Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://www.smashingmagazine.com/2017/08/ai-chatbot-web-speech-api-node-js/",
+  "created_on": "2017-08-13T19:07:49.604Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://github.com/cheekybits/genny",
+  "created_on": "2017-08-15T15:17:35.454Z",
+  "category": "github",
+  "done": true
+}, {
+  "url": "https://github.com/sariina/mina",
+  "created_on": "2017-08-17T14:30:48.441Z",
+  "category": "github",
+  "done": true
+}, {
+  "url": "https://github.com/luk4z7/logres",
+  "created_on": "2017-08-17T14:32:02.221Z",
+  "category": "github",
+  "done": true
+}, {
+  "url": "https://github.com/iulianclita/logy",
+  "created_on": "2017-08-20T13:44:22.114Z",
+  "category": "github",
+  "done": true
+}, {
+  "url": "https://vuejsdevelopers.com/2017/08/20/vue-js-brunch/",
+  "created_on": "2017-08-21T13:29:32.723Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://scriptartist.github.io/Scalable/",
+  "created_on": "2017-08-21T14:26:47.077Z",
+  "category": "javascript",
+  "done": false
+}, {
+  "url": "https://pair-code.github.io/deeplearnjs/",
+  "created_on": "2017-08-21T14:27:35.317Z",
+  "category": "javascript",
   "done": false
 }]

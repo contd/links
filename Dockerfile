@@ -12,5 +12,7 @@ ENV SQLITE_PATH /data/saved.sqlite
 VOLUME /data
 WORKDIR /app
 COPY --from=build-env /src/goapp /app/
+COPY --from=build-env /src/links.html /app/
+COPY --from=build-env /src/favicon.ico /app/
 COPY --from=build-env /src/saved.sqlite /data/
 ENTRYPOINT ./goapp

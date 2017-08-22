@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/jmoiron/sqlx"
 	"time"
+
+	"github.com/jmoiron/sqlx"
 )
 
 type link struct {
@@ -10,7 +11,7 @@ type link struct {
 	Url      string    `json:"url"`
 	Category string    `json:"category"`
 	Created  time.Time `json:"created_on"`
-	Done     int       `json:"done"`
+	Done     bool      `json:"done"`
 }
 
 func (l *link) getLink(db *sqlx.DB) error {

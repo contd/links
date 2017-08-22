@@ -1,9 +1,8 @@
-package main_test
+package main
 
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/contd/links"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -11,10 +10,10 @@ import (
 	"testing"
 )
 
-var a main.App
+var a App
 
 func TestMain(m *testing.M) {
-	a = main.App{}
+	a = App{}
 	a.Initialize("saved_test.sqlite")
 	ensureTableExists()
 	code := m.Run()
@@ -52,7 +51,7 @@ func TestGetNonExistentLink(t *testing.T) {
 func TestCreateLink(t *testing.T) {
 	clearTable()
 
-	payload := []byte(`{"url":"new url","category":"general","done":0}`)
+	payload := []byte(`{"url":"new url","category":"general","done":false}`)
 
 	req, _ := http.NewRequest("POST", "/link", bytes.NewBuffer(payload))
 	response := executeRequest(req)
@@ -179,5 +178,5 @@ const tableCreationQuery = `CREATE TABLE IF NOT EXISTS links
 	url VARCHAR NOT NULL,
 	category VARCHAR NOT NULL,
 	created_on DATETIME DEFAULT CURRENT_TIMESTAMP,
-	done INTEGER
+	done BOOL
 )`

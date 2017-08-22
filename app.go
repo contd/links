@@ -15,8 +15,16 @@ import (
 )
 
 type Page struct {
-	Title  string
-	Author string
+	Title      string
+	Author     string
+	Categories []Category
+}
+
+type Category struct {
+	Name   string
+	Tag    string
+	Color  string
+	Border string
 }
 
 type App struct {
@@ -50,8 +58,15 @@ func (a *App) initializeRoutes() {
 }
 
 func (a *App) getIndex(w http.ResponseWriter, r *http.Request) {
-	page := &Page{Title: "Links Saved", Author: "Jason Kumpf"}
-	t, _ := template.ParseFiles("templates/links.html")
+	cats := []Category{}
+	cats = append(cats, Category{Name: "Javascript", Tag: "javascript", Color: "lightblue", Border: "blue"})
+	cats = append(cats, Category{Name: "Coding", Tag: "coding", Color: "lightcoral", Border: "red"})
+	cats = append(cats, Category{Name: "Tutorial", Tag: "tutorial", Color: "lightgreen", Border: "green"})
+	cats = append(cats, Category{Name: "Github", Tag: "github", Color: "lightgrey", Border: "black"})
+	cats = append(cats, Category{Name: "Jobs", Tag: "jobs", Color: "yellow", Border: "red"})
+
+	page := &Page{Title: "Links Saved", Author: "Jason Kumpf", Categories: cats}
+	t, _ := template.ParseFiles("links.html")
 	t.Execute(w, page)
 }
 
@@ -93,11 +108,12 @@ func (a *App) createLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer r.Body.Close()
-	_, err := l.createLink(a.DB)
+	id, err := l.createLink(a.DB)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	l.ID = int(id)
 	respondWithJSON(w, http.StatusCreated, l)
 }
 
