@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="{{.Author}}">
+	<meta name="title" content="{{.Title}}">
+	<meta name="description" content="Simple place to save links with a REST service and utilizes url parameters for bookmarklet custimizations.">
+	<title>{{.Title}}</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+	<style>
+	html, body { margin: 0; padding: 0; font-size: 1em; font-family: sans-serif; }
+	h1 {  font-size: 2em; }
+	h2 {  font-size: 0.9em; }
+	li {  padding: 0; margin: 2px 0 0 0; font-family: sans-serif; font-size: 1em; list-style: disc; }
+	li:hover { list-style: circle; }
+	a { font-weight: normal; font-size: 1em; }
+	a:hover { background-color: yellow; }
+	header { margin: 0; padding 0; display: flex; }
+	header h1 {  display: inline-flex;
+			margin-left: 20px; margin-bottom: 5px; margin-top: 5px; }
+	header .filters { border: 2px solid lightgrey;
+	  display: inline-flex; padding: 5px; margin: 0 20px 0 20px; }
+	button.filter { margin: 0 0 0 2px; }
+	nav { background-color: lightgrey; margin: 0; }
+	.delete-item { color: grey;
+	  font-size: 0.6em; font-weight: bold;
+	  margin-left: 10px; padding: 2px 5px 0 5px; }
+	.delete-item:hover { color: black; background: cyan; padding: 2px 5px 0 5px; }
+	.date-saved { font-size: 0.8em; color: darkgray; }
+	.badge-javascript,
+	.badge-coding,
+	.badge-tutorial,
+	.badge-github,
+	.badge-jobs { font-size: 0.9em; padding: 2px; }
+	.badge-javascript:hover,
+	.badge-coding:hover,
+	.badge-tutorial:hover,
+	.badge-github:hover,
+	.badge-jobs:hover { font-weight: bold; }
+	.badge-javascript { border: 1px solid blue; background: lightblue; }
+	.badge-coding { border: 1px solid red; background: lightcoral; }
+	.badge-tutorial { border: 1px solid green; background: lightgreen; }
+	.badge-github { border: 1px solid black; background: lightgrey; }
+	.badge-jobs { border: 1px solid red; background: yellow; }
+	input[type=checkbox]:checked + label.strikethrough{ text-decoration: line-through; }
+	input[type=text] { width: 300px; margin: 10px 10px 10px 40px; }
+	.filter-none { border: 1px solid grey; padding: 2px; }
+	.filter-none:hover { font-weight: bold; }
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <main>
+  	<header>
+  	  <h1>{{.Title}}</h1>
+  	  <div class="filters">
+			<h2>Filter By:</h2>
+			{{ range .Categories }}
+			<button class="filter badge-{{.Tag}}" onclick="filterPopulate('{{.Tag}}');">{{ .Name }}</button>
+			{{ end }}
+			<button class="filter filter-none" onclick="filterPopulate('');">Show All</button>
+		</div>
+  	</header>
+  	<nav>
+  	  <form class="add-links">
+		<input type="text" name="link" placeholder="http://somesite.com" required>
+		<select name="category">
+			{{ range .Categories }}
+			<option value="{{.Tag}}">{{.Name}}</option>
+			{{ end }}
+		</select>
+		<input type="submit" value="+ Add Link">
+	  </form>
+  	</nav>
+  	<section class="content">
+  	  <ul class="links-list">
+		<li>
+			Loading List...
+		</li>
+	  </ul>
+  	</section>
+  </main>
+
+	<script>
+		function get_params(search_string) {
+			function parse(params, pairs) {
+				var pair = pairs[0];
+				var parts = pair.split('=');
+				var key = decodeURIComponent(parts[0]);
+				var value = decodeURIComponent(parts.slice(1).join('='));
+				// Handle multiple parameters of the same name
+				if (typeof params[key] === "undefined") {
+					params[key] = value;
+				} else {
+					params[key] = [].concat(params[key], value);
+				}
+				return pairs.length == 1 ? params : parse(params, pairs.slice(1))
+			}
+			// Get rid of leading ?
+			return search_string.length == 0 ? {} : parse({}, search_string.substr(1).split('&'));
+		}
+
+		async function addLink(e) {
+			e.preventDefault();
+
+			const url = (this.querySelector('[name=link]')).value;
+			const category = (this.querySelector('[name=category]')).value;
+			const link = {
+				url,
+				created_on: dateFns.format(new Date(), 'YYYY-MM-DDTHH:mm:ss.SSSZ'),
+				category,
+				done: false
+			};
+			// axios.post()
+			await axios.post('/link', link)
+				.then(function(resp) {
+					console.log("RESPONSE: ", resp);
+				})
+				.catch(function(err) {
+					console.log("ERROR: ", err);
+					//localStorage.setItem('linksSaved', JSON.stringify(links));
+				});
+
+			links.push(link);
+			populateList(links, linksList);
+			this.reset();
+
+			if (params && params['url'] !== undefined) {
+				document.location = '/';
+			}
+		}
+
+		function populateList(items = [], itemsList) {
+			itemsList.innerHTML = items.map((item, i) => {
+				if (toFilterBy === '' || (item && item.category === toFilterBy)) {
+					return `
+		  <li>
+			<input type="checkbox" data-index=${item && item.id} id="item${item && item.id}" ${item && item.done ? 'checked' : ''} />
+			<label class="strikethrough" for="item${item && item.id}">
+				<a href="${item && item.url}" target="_blank">${item && item.url}</a>
+				<span class="badge-${item && item.category}">${item && item.category}</span>
+			</label>
+			<button data-index=${item && item.id} id="remitem${item && item.id}" class="delete-item"> X </button>
+			<span class="date-saved">(${item && dateFns.format(parse(item.created_on), 'MM/DD/YYYY')})</span>
+		  </li>
+      	`;
+				}
+			}).join('');
+		}
+
+		function filterPopulate(filterBy) {
+			toFilterBy = filterBy;
+			populateList(links, linksList);
+		}
+
+		function findById(index) {
+			var rlink;
+			for (link of links) {
+				if (parseInt(index) === link.id) {
+					rlink = link
+					return rlink
+				}
+			}
+			//return rlink
+		}
+
+		function findByIndex(id) {
+			for (let i=0; i<links.length; i++) {
+				if (parseInt(id) === parseInt(links[i].id)) {
+					return i;
+				}
+			}
+		}
+
+		async function toggleDone(e) {
+			if (!e.target.matches('input') && !e.target.matches('button')) return;
+
+			const el = e.target;
+			const index = el.dataset.index;
+			let link = findById(index);
+
+			if (el.matches('input')) {
+				//links[index].done = !links[index].done;
+				//const link = { id: parseInt(index), done: itsdone }
+				link.done = !link.done;
+				// axios.put()
+				await axios.put('/link/'+index, link)
+					.then(function(resp) {
+						populateList(links, linksList);
+					})
+					.catch(function(err) {
+						console.log("Update ERR: ", err);
+						//localStorage.setItem('linksSaved', JSON.stringify(links));
+					})
+			} else if (el.matches('button')) {
+				idx = findByIndex(index);
+				links.splice(idx, 1);
+				// axios.delete()
+				await axios.delete('/link/'+index, link)
+					.then(function(resp) {
+						populateList(links, linksList);
+						console.log("Remove item: ", link.id);
+					})
+					.catch(function(err) {
+						console.log("Delete ERR: ", err);
+						//localStorage.setItem('linksSaved', JSON.stringify(links));
+					})
+			}
+		}
+
+		async function getLinks() {
+			let linksResp = [];
+			// Get from links go service running on: http://localhost:5555/links
+			await axios.get('/links')
+				.then(function(resp) {
+					linksResp = resp.data;
+				})
+				.catch(function(err) {
+					console.log(err);
+					//linksResp = JSON.parse(localStorage.getItem('linksSaved'));
+				});
+			return linksResp
+		}
+
+		const parse = dateFns.parse;
+		const params = get_params(location.search);
+		const addLinks = document.querySelector('.add-links');
+		const linksList = document.querySelector('.links-list');
+		addLinks.addEventListener('submit', addLink);
+		linksList.addEventListener('click', toggleDone);
+
+		var toFilterBy = '';
+		let links = [];
+
+		getLinks()
+			.then( function(result) {
+				links = result;
+				populateList(links, linksList);
+			})
+			.catch( function(err) {
+				console.log(err);
+			});
+
+		if (params && params['url'] !== undefined) {
+			(document.querySelector('[name=link]')).value = params['url'];
+			if (params['category'] !== undefined) {
+				(document.querySelector('[name=category')).value = params['category'];
+				//console.log((document.querySelector('[name=category')).value);
+			}
+		}
+
+	</script>
+
+</body>
+</html>
