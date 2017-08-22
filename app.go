@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"html/template"
 	"log"
 	"net/http"
 	"strconv"
@@ -12,6 +13,11 @@ import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3"
 )
+
+type Page struct {
+	Title  string
+	Author string
+}
 
 type App struct {
 	Router *mux.Router
@@ -31,15 +37,22 @@ func (a *App) Initialize(dbname string) {
 func (a *App) Run(addr string) {
 	log.Println("Running on http://localhost:5555/")
 	corsObj := handlers.AllowedOrigins([]string{"*"})
-	log.Fatal(http.ListenAndServe(":5555", handlers.CORS(corsObj)(a.Router)))
+	log.Println(http.ListenAndServe(":5555", handlers.CORS(corsObj)(a.Router)))
 }
 
 func (a *App) initializeRoutes() {
+	a.Router.HandleFunc("/", a.getIndex).Methods("GET")
 	a.Router.HandleFunc("/links", a.getLinks).Methods("GET")
 	a.Router.HandleFunc("/link/{id:[0-9]+}", a.getLink).Methods("GET")
 	a.Router.HandleFunc("/link", a.createLink).Methods("POST")
 	a.Router.HandleFunc("/link/{id:[0-9]+}", a.updateLink).Methods("PUT")
 	a.Router.HandleFunc("/link/{id:[0-9]+}", a.deleteLink).Methods("DELETE")
+}
+
+func (a *App) getIndex(w http.ResponseWriter, r *http.Request) {
+	page := &Page{Title: "Links Saved", Author: "Jason Kumpf"}
+	t, _ := template.ParseFiles("templates/links.html")
+	t.Execute(w, page)
 }
 
 func (a *App) getLinks(w http.ResponseWriter, r *http.Request) {
