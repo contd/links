@@ -59,11 +59,11 @@ func (a *App) initializeRoutes() {
 
 func (a *App) getIndex(w http.ResponseWriter, r *http.Request) {
 	cats := []Category{}
-	cats = append(cats, Category{Name: "Javascript", Tag: "javascript", Color: "lightblue", Border: "blue"})
+	cats = append(cats, Category{Name: "Sites", Tag: "sites", Color: "lightblue", Border: "blue"})
 	cats = append(cats, Category{Name: "Coding", Tag: "coding", Color: "lightcoral", Border: "red"})
 	cats = append(cats, Category{Name: "Tutorial", Tag: "tutorial", Color: "lightgreen", Border: "green"})
 	cats = append(cats, Category{Name: "Github", Tag: "github", Color: "lightgrey", Border: "black"})
-	cats = append(cats, Category{Name: "Jobs", Tag: "jobs", Color: "yellow", Border: "red"})
+	cats = append(cats, Category{Name: "Tools", Tag: "tools", Color: "yellow", Border: "red"})
 
 	page := &Page{Title: "Links Saved", Author: "Jason Kumpf", Categories: cats}
 	t, _ := template.ParseFiles("links.html")

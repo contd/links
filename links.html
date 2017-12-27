@@ -28,22 +28,18 @@
 	  font-size: 0.6em; font-weight: bold;
 	  margin-left: 10px; padding: 2px 5px 0 5px; }
 	.delete-item:hover { color: black; background: cyan; padding: 2px 5px 0 5px; }
-	.date-saved { font-size: 0.8em; color: darkgray; }
-	.badge-javascript,
-	.badge-coding,
-	.badge-tutorial,
-	.badge-github,
-	.badge-jobs { font-size: 0.9em; padding: 2px; }
-	.badge-javascript:hover,
-	.badge-coding:hover,
-	.badge-tutorial:hover,
-	.badge-github:hover,
-	.badge-jobs:hover { font-weight: bold; }
-	.badge-javascript { border: 1px solid blue; background: lightblue; }
-	.badge-coding { border: 1px solid red; background: lightcoral; }
-	.badge-tutorial { border: 1px solid green; background: lightgreen; }
-	.badge-github { border: 1px solid black; background: lightgrey; }
-	.badge-jobs { border: 1px solid red; background: yellow; }
+  .date-saved { font-size: 0.8em; color: darkgray; }
+{{ range .Categories }}
+  .badge-{{.Tag}} {
+    font-size: 0.9em;
+    padding: 2px;
+		border: 1px solid {{.Border}};
+		background: {{.Color}};
+  }
+  .badge-{{.Tag}}:hover {
+    font-weight: bold;
+  }
+{{ end }}
 	input[type=checkbox]:checked + label.strikethrough{ text-decoration: line-through; }
 	input[type=text] { width: 300px; margin: 10px 10px 10px 40px; }
 	.filter-none { border: 1px solid grey; padding: 2px; }
