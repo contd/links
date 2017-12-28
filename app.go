@@ -14,24 +14,28 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+// Page is the structure for saved urls or pages.
 type Page struct {
 	Title      string
 	Author     string
 	Categories []Category
 }
 
+// Category is the main categorie for saved urls.
 type Category struct {
-	Name   string
-	Tag    string
-	Color  string
-	Border string
+	Name  string
+	Tag   string
+	Color string
+	Font  string
 }
 
+// App is the main app in a struct for unit testability.
 type App struct {
 	Router *mux.Router
 	DB     *sqlx.DB
 }
 
+// Initialize the app and the database connection. Better than init()
 func (a *App) Initialize(dbname string) {
 	var err error
 	a.DB, err = sqlx.Connect("sqlite3", dbname)
@@ -42,6 +46,7 @@ func (a *App) Initialize(dbname string) {
 	a.initializeRoutes()
 }
 
+// Run is how the server is started, so other parts can be unit tested.
 func (a *App) Run(addr string) {
 	log.Println("Running on http://localhost:5555/")
 	corsObj := handlers.AllowedOrigins([]string{"*"})
@@ -59,11 +64,18 @@ func (a *App) initializeRoutes() {
 
 func (a *App) getIndex(w http.ResponseWriter, r *http.Request) {
 	cats := []Category{}
-	cats = append(cats, Category{Name: "Sites", Tag: "sites", Color: "lightblue", Border: "blue"})
-	cats = append(cats, Category{Name: "Coding", Tag: "coding", Color: "lightcoral", Border: "red"})
-	cats = append(cats, Category{Name: "Tutorial", Tag: "tutorial", Color: "lightgreen", Border: "green"})
-	cats = append(cats, Category{Name: "Github", Tag: "github", Color: "lightgrey", Border: "black"})
-	cats = append(cats, Category{Name: "Tools", Tag: "tools", Color: "yellow", Border: "red"})
+	cats = append(cats, Category{Name: "Shell", Tag: "shell", Color: "#001f3f", Font: "white"})
+	cats = append(cats, Category{Name: "Awesome", Tag: "awesome", Color: "#0074D9", Font: "white"})
+	cats = append(cats, Category{Name: "CSS", Tag: "css", Color: "#7FDBFF", Font: "#001f3f"})
+	cats = append(cats, Category{Name: "DevOps", Tag: "devops", Color: "#39CCCC", Font: "#001f3f"})
+	cats = append(cats, Category{Name: "Data", Tag: "data", Color: "#3D9970", Font: "#001f3f"})
+	cats = append(cats, Category{Name: "Github", Tag: "github", Color: "#2ECC40", Font: "#001f3f"})
+	cats = append(cats, Category{Name: "Go", Tag: "go", Color: "#01FF70", Font: "#001f3f"})
+	cats = append(cats, Category{Name: "Hack", Tag: "hack", Color: "#FFDC00", Font: "#001f3f"})
+	cats = append(cats, Category{Name: "Javascript", Tag: "javascript", Color: "#FF851B", Font: "#001f3f"})
+	cats = append(cats, Category{Name: "Work", Tag: "shell", Color: "#B10DC9", Font: "white"})
+	cats = append(cats, Category{Name: "Sites", Tag: "sites", Color: "#85144b", Font: "white"})
+	cats = append(cats, Category{Name: "Tools", Tag: "tools", Color: "#DDDDDD", Font: "#001f3f"})
 
 	page := &Page{Title: "Links Saved", Author: "Jason Kumpf", Categories: cats}
 	t, _ := template.ParseFiles("links.html")

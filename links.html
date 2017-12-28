@@ -33,8 +33,12 @@
   .badge-{{.Tag}} {
     font-size: 0.9em;
     padding: 2px;
-		border: 1px solid {{.Border}};
+		border: 1px solid rgba(0, 0, 0, 0.1);
 		background: {{.Color}};
+		color: {{.Font}};
+  }
+  .badge-{{.Tag}}:hover > div {
+	background-color:rgba(0, 0, 0, 0.1);
   }
   .badge-{{.Tag}}:hover {
     font-weight: bold;
@@ -56,7 +60,7 @@
   	  <div class="filters">
 			<h2>Filter By:</h2>
 			{{ range .Categories }}
-			<button class="filter badge-{{.Tag}}" onclick="filterPopulate('{{.Tag}}');">{{ .Name }}</button>
+			<button class="filter badge-{{.Tag}}" onclick="filterPopulate('{{.Tag}}');"><div>{{ .Name }}</div></button>
 			{{ end }}
 			<button class="filter filter-none" onclick="filterPopulate('');">Show All</button>
 		</div>

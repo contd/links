@@ -38,14 +38,12 @@ func (l *link) createLink(db *sqlx.DB) (int64, error) {
 		l.Url, l.Category, l.Created, l.Done)
 	if err != nil {
 		return -1, err
-	} else {
-		id, err := res.LastInsertId()
-		if err != nil {
-			return -1, err
-		} else {
-			return id, nil
-		}
 	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return -1, err
+	}
+	return id, nil
 }
 
 func getLinks(db *sqlx.DB) ([]link, error) {
