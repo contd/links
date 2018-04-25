@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Docker Hub...
-      # Type the command to log in to your Docker Hub account here.          
+      - docker login -u contd -p $DOCKER_PWD
   build:
     commands:
       - echo Build started on `date`
