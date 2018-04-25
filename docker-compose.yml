@@ -1,0 +1,12 @@
+version: '2'
+services:
+  contd_links:
+    build: .
+    dockerfile: Dockerfile
+    ports:
+      - 5555:5555
+    restart: always
+    volumes:
+      - /mnt/efs:/data
+    environment:
+      - REGION=us-east-2

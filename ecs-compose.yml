@@ -1,0 +1,19 @@
+version: '2'
+services:
+  contd_links:
+    image: contd/links:latest
+    cpu_shares: 100
+    mem_limit: 524288000
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: "/ecs/contd-links"
+        awslogs-region: us-east-2
+        awslogs-stream-prefix: contd-links
+    ports:
+      - 5555:5555
+    restart: always
+    volumes:
+      - /mnt/efs:/data
+    environment:
+      - REGION=us-east-2

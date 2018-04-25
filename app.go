@@ -77,7 +77,7 @@ func (a *App) getIndex(w http.ResponseWriter, r *http.Request) {
 	cats = append(cats, Category{Name: "Sites", Tag: "sites", Color: "#85144b", Font: "white"})
 	cats = append(cats, Category{Name: "Tools", Tag: "tools", Color: "#DDDDDD", Font: "#001f3f"})
 
-	page := &Page{Title: "Links Saved", Author: "Jason Kumpf", Categories: cats}
+	page := &Page{Title: "Links", Author: "Jason Kumpf", Categories: cats}
 	t, _ := template.ParseFiles("links.html")
 	t.Execute(w, page)
 }
