@@ -8,7 +8,7 @@ services:
       driver: awslogs
       options:
         awslogs-group: "/ecs/contd-links"
-        awslogs-region: us-east-2
+        awslogs-region: us-east-1
         awslogs-stream-prefix: contd-links
     ports:
       - 5555:5555
@@ -16,4 +16,5 @@ services:
     volumes:
       - /mnt/efs:/data
     environment:
-      - REGION=us-east-2
+      - REGION=us-east-1
+      - SQLITE_PATH=/data/saved.sqlite

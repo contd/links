@@ -1,4 +1,4 @@
-package main
+package model
 
 import (
 	"time"
@@ -6,36 +6,41 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type link struct {
+// Link is the struct for link database objects
+type Link struct {
 	ID       int       `json:"id"`
-	Url      string    `json:"url"`
+	URL      string    `json:"url"`
 	Category string    `json:"category"`
 	Created  time.Time `json:"created_on"`
 	Done     bool      `json:"done"`
 }
 
-func (l *link) getLink(db *sqlx.DB) error {
+// GetLink gets a single link given its id
+func (l *Link) GetLink(db *sqlx.DB) error {
 	return db.QueryRow(
 		"SELECT id, url, category, created_on, done FROM links WHERE id=?",
-		l.ID).Scan(&l.ID, &l.Url, &l.Category, &l.Created, &l.Done)
+		l.ID).Scan(&l.ID, &l.URL, &l.Category, &l.Created, &l.Done)
 }
 
-func (l *link) updateLink(db *sqlx.DB) error {
+// UpdateLink updates a link given its id
+func (l *Link) UpdateLink(db *sqlx.DB) error {
 	_, err := db.Exec(
 		"UPDATE links SET url=?, category=?, done=? WHERE id=?",
-		l.Url, l.Category, l.Done, l.ID)
+		l.URL, l.Category, l.Done, l.ID)
 	return err
 }
 
-func (l *link) deleteLink(db *sqlx.DB) error {
+// DeleteLink deletes a link given its id
+func (l *Link) DeleteLink(db *sqlx.DB) error {
 	_, err := db.Exec("DELETE FROM links WHERE id=?", l.ID)
 	return err
 }
 
-func (l *link) createLink(db *sqlx.DB) (int64, error) {
+// CreateLink makes a new link
+func (l *Link) CreateLink(db *sqlx.DB) (int64, error) {
 	res, err := db.Exec(
 		"INSERT INTO links(url, category, created_on, done) VALUES(?, ?, ?, ?)",
-		l.Url, l.Category, l.Created, l.Done)
+		l.URL, l.Category, l.Created, l.Done)
 	if err != nil {
 		return -1, err
 	}
@@ -46,17 +51,18 @@ func (l *link) createLink(db *sqlx.DB) (int64, error) {
 	return id, nil
 }
 
-func getLinks(db *sqlx.DB) ([]link, error) {
+// GetLinks gets all Links
+func GetLinks(db *sqlx.DB) ([]Link, error) {
 	rows, err := db.Query("SELECT id, url, category, created_on, done FROM links")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	links := []link{}
+	links := []Link{}
 
 	for rows.Next() {
-		var l link
-		if err := rows.Scan(&l.ID, &l.Url, &l.Category, &l.Created, &l.Done); err != nil {
+		var l Link
+		if err := rows.Scan(&l.ID, &l.URL, &l.Category, &l.Created, &l.Done); err != nil {
 			return nil, err
 		}
 		links = append(links, l)

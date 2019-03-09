@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"database/sql"
@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/contd/links/model"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 // Page is the structure for saved urls or pages.
@@ -78,12 +78,12 @@ func (a *App) getIndex(w http.ResponseWriter, r *http.Request) {
 	cats = append(cats, Category{Name: "Tools", Tag: "tools", Color: "#DDDDDD", Font: "#001f3f"})
 
 	page := &Page{Title: "Links", Author: "Jason Kumpf", Categories: cats}
-	t, _ := template.ParseFiles("links.html")
+	t, _ := template.ParseFiles("web/links.html")
 	t.Execute(w, page)
 }
 
 func (a *App) getLinks(w http.ResponseWriter, r *http.Request) {
-	links, err := getLinks(a.DB)
+	links, err := model.GetLinks(a.DB)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -99,8 +99,8 @@ func (a *App) getLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	l := link{ID: id}
-	if err := l.getLink(a.DB); err != nil {
+	l := model.Link{ID: id}
+	if err := l.GetLink(a.DB); err != nil {
 		switch err {
 		case sql.ErrNoRows:
 			respondWithError(w, http.StatusNotFound, "Link not found")
@@ -113,14 +113,14 @@ func (a *App) getLink(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) createLink(w http.ResponseWriter, r *http.Request) {
-	var l link
+	var l model.Link
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&l); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
 	defer r.Body.Close()
-	id, err := l.createLink(a.DB)
+	id, err := l.CreateLink(a.DB)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -137,7 +137,7 @@ func (a *App) updateLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var l link
+	var l model.Link
 	decoder := json.NewDecoder(r.Body)
 
 	if err := decoder.Decode(&l); err != nil {
@@ -148,7 +148,7 @@ func (a *App) updateLink(w http.ResponseWriter, r *http.Request) {
 
 	l.ID = id
 
-	if err := l.updateLink(a.DB); err != nil {
+	if err := l.UpdateLink(a.DB); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -164,9 +164,9 @@ func (a *App) deleteLink(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	l := link{ID: id}
+	l := model.Link{ID: id}
 
-	if err := l.deleteLink(a.DB); err != nil {
+	if err := l.DeleteLink(a.DB); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}

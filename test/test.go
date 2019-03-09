@@ -1,4 +1,4 @@
-package main
+package test
 
 import (
 	"bytes"
@@ -8,12 +8,14 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
+
+	"github.com/contd/links/app"
 )
 
-var a App
+var a app.App
 
 func TestMain(m *testing.M) {
-	a = App{}
+	a = app.App{}
 	a.Initialize("saved_test.sqlite")
 	ensureTableExists()
 	code := m.Run()

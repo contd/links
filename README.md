@@ -11,7 +11,6 @@ go test -v .
 go test -cover .
 ```
 
-
 ### Code Coverage
 
 For getting code coverage information and a nice html output the following can and was run to generate both the `coverage.out` file and opens a browser showing the nice html coverage report:
@@ -33,8 +32,9 @@ go tool cover  -html=coverage.out
 Once the tests all pass you can build your own docker image with the included docker file like so:
 
 ```bash
-docker build -t contd/links .
+docker-compose build
 ```
+
 If you use `go install` the binary will expect the saved.sqlite file to be in the same directory.  You can override this by passing an environment variable like so:
 
 ```bash
@@ -48,6 +48,10 @@ This assumes your `PATH` includes `$GOPATH/bin` and you must include the file na
 To run this in docker and persist the sqlite database, use the following once you've created an image from the `Dockerfile`:
 
 ```bash
+docker-compose up -d
+
+or longhand ...
+
 docker run --name golinks -d -p 5555:5555 -v $GOPATH/src/github.com/contd/links:/data contd/links
 ```
 

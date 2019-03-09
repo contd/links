@@ -1,12 +1,22 @@
-version: '2'
+version: "3.1"
+
+networks:
+  web:
+    external: true
+
 services:
-  contd_links:
+  golinks:
     build: .
-    dockerfile: Dockerfile
-    ports:
-      - 5555:5555
+    container_name: golinks
     restart: always
     volumes:
-      - /mnt/efs:/data
+      - ./data:/data
     environment:
-      - REGION=us-east-2
+      - SQLITE_PATH=/data/saved.sqlite
+    labels:
+      - traefik.backend=links
+      - traefik.frontend.rule=Host:links.kumpf.home
+      - traefik.docker.network=web
+      - traefik.port=5555
+    networks:
+      - web

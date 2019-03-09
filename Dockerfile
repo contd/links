@@ -1,18 +1,27 @@
-# build stage
-FROM golang:alpine AS build-env
-RUN apk add --no-cache git
-RUN apk add --no-cache sqlite
-RUN apk add --no-cache g++
-ADD . /src
-RUN cd /src && go get -d -v ./... && go build -o goapp
+# Builder image
+FROM golang AS builder
 
-# final stage
-FROM alpine
-ENV SQLITE_PATH /data/saved.sqlite
-VOLUME /data
+ENV GO111MODULE=on
+
 WORKDIR /app
-COPY --from=build-env /src/goapp /app/
-COPY --from=build-env /src/links.html /app/
-COPY --from=build-env /src/favicon.ico /app/
-COPY --from=build-env /src/saved.sqlite /data/
-ENTRYPOINT ./goapp
+
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o goapp
+
+# Production image
+FROM scratch
+ENV SQLITE_PATH=/data/saved.sqlite
+VOLUME /data
+COPY --from=builder /app/goapp /app/
+COPY --from=builder /app/web/favicon.svg /app/web/
+COPY --from=builder /app/web/links.html /app/web/
+COPY --from=builder /app/data/saved.sqlite /data/
+
+EXPOSE 5555
+ENTRYPOINT [ "/app/goapp" ]
